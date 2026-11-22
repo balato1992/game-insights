@@ -1,0 +1,7 @@
+{
+  "_note": "偏好類型只用來加分，不會過濾任何類型。boost 是乘數；改這裡即可調整。",
+  "boost_tags": ["Colony Sim", "Farming Sim", "Cozy", "Life Sim", "City Builder"],
+  "boost": 1.3,
+  "success_metric": "pct_ge100",
+  "_success_note": "以「能全職獨立」為目標時，約 100 則評論（約 3,500 套）比 1,000 則更接近門檻。"
+}
