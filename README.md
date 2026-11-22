@@ -14,6 +14,7 @@
 - 資料來源：`store.steampowered.com/search/results`，按上市日排序，逐頁讀取。
 - 成熟期分組：上市 365–730 天前的遊戲，評論已累積一年。成功率 = 評論數 ≥ 1,000 的比例（以約 35 套 / 則評論換算，約 3.5 萬套）。
 - 近期分組：近 90 天上市的遊戲，用來看新作供給與正在起量的作品。
+- 推薦排序：以「≥100 評論比例 ÷ 全體平均」為基礎分數，`config/preferences.json` 裡的偏好類型乘上加權（預設 1.3）。偏好只加分、不過濾，所有類型都會列出。
 - 追蹤的標籤列在 `config/tags.json`，可自行增減（數字是 Steam 標籤 ID，可從 `https://store.steampowered.com/tagdata/populartags/english` 查詢）。
 
 ## 排程

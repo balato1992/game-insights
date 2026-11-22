@@ -46,6 +46,9 @@ def main() -> None:
     games = load_games(cur_dir)
 
     tags = [t for (t, c) in cur if c == "matured" and not t.startswith("ALL")]
+    prefs = json.loads((ROOT / "config" / "preferences.json").read_text())
+    boost_tags = set(prefs.get("boost_tags", []))
+    boost = float(prefs.get("boost", 1.0))
     allm = cur[("ALL (unique)", "matured")]
     avg = num(allm["pct_ge1000"]) or 0
 
@@ -57,8 +60,27 @@ def main() -> None:
     L.append(f"成熟期共 {allm['releases']} 款不重複遊戲，{allm['pct_ge1000']}% 累積到 1,000 則評論（約 3.5 萬套），"
              f"{allm['pct_under10']}% 不到 10 則。\n")
 
+    avg100 = num(allm["pct_ge100"]) or 1
+    L.append("## 〇、推薦排序（偏好類型加分，不過濾）\n")
+    L.append(f"基礎分數 = 該類型「≥100 評論」比例 ÷ 全體平均（{avg100}%），1.0 代表和平均一樣。"
+             f"你的偏好類型（{', '.join(sorted(boost_tags))}）再乘以 {boost}。"
+             "所有類型都列出；分數只是討論起點，樣本小（新作 < 150 款）的標籤會標註。\n")
+    L.append("| 排名 | 類型 | 偏好 | ≥100 評論 | 基礎分數 | 最終分數 | 一年新作 | 備註 |")
+    L.append("| ---: | --- | --- | ---: | ---: | ---: | ---: | --- |")
+    scored = []
+    for t in tags:
+        r = cur[(t, "matured")]
+        base = (num(r.get("pct_ge100")) or 0) / avg100
+        final = base * (boost if t in boost_tags else 1.0)
+        scored.append((final, base, t, r))
+    for i, (final, base, t, r) in enumerate(sorted(scored, key=lambda x: -x[0]), 1):
+        note = "樣本小，可能高估" if (num(r.get("releases")) or 0) < 150 else ""
+        L.append(f"| {i} | {t} | {'加分' if t in boost_tags else ''} | {r.get('pct_ge100', '')}% | {base:.2f} | {final:.2f} "
+                 f"| {r['releases']} | {note} |")
+    L.append("")
+
     L.append("## 一、各類型成功率（成熟期）\n")
-    L.append("成功率 = 評論數 ≥ 1,000 的比例。★ = 全體平均的 2 倍以上。週變化單位為百分點。\n")
+    L.append("≥1,000 評論約 3.5 萬套（大成功）；≥100 評論約 3,500 套（接近單人全職的門檻）。★ = ≥1,000 比例是全體平均的 2 倍以上；「加分」= 你的偏好類型。週變化單位為百分點。\n")
     L.append("| 類型 | 新作數 | ≥1,000 評論 | 週變化 | ≥100 評論 | 評論中位數 |")
     L.append("| --- | ---: | ---: | ---: | ---: | ---: |")
     rows = sorted(tags, key=lambda t: -(num(cur[(t, "matured")].get("pct_ge1000")) or 0))
@@ -67,7 +89,8 @@ def main() -> None:
         p = prev.get((t, "matured"), {})
         hit = num(r.get("pct_ge1000"))
         star = " ★" if hit is not None and hit >= 2 * avg else ""
-        L.append(f"| {t}{star} | {r['releases']} | {r.get('pct_ge1000', '')}% | {delta(hit, num(p.get('pct_ge1000')))} "
+        mark = "（加分）" if t in boost_tags else ""
+        L.append(f"| {t}{mark}{star} | {r['releases']} | {r.get('pct_ge1000', '')}% | {delta(hit, num(p.get('pct_ge1000')))} "
                  f"| {r.get('pct_ge100', '')}% | {r.get('median_reviews', '')} |")
     L.append("")
 
@@ -92,9 +115,21 @@ def main() -> None:
     L.append("## 三、近 90 天評論最多的新作（值得拆解的競品）\n")
     L.append("| 遊戲 | 上市 | 評論數 | 好評率 | 售價 (USD) | 標籤 |")
     L.append("| --- | --- | ---: | ---: | ---: | --- |")
+    def tag_cell(ts):
+        return ", ".join(f"**{x}**" if x in boost_tags else x for x in sorted(ts))
     for appid, e in top:
         L.append(f"| [{e['name']}](https://store.steampowered.com/app/{appid}/) | {e['released']} | {e['reviews']:,} "
-                 f"| {e['pos'] or '—'}% | {e['price'] or '—'} | {', '.join(sorted(e['tags']))} |")
+                 f"| {e['pos'] or '—'}% | {e['price'] or '—'} | {tag_cell(e['tags'])} |")
+    L.append("")
+    L.append("粗體 = 你的偏好類型。\n")
+
+    pref_top = [kv for kv in sorted(recent.items(), key=lambda kv: -kv[1]["reviews"]) if kv[1]["tags"] & boost_tags][:10]
+    L.append("### 偏好類型的近期新作\n")
+    L.append("| 遊戲 | 上市 | 評論數 | 好評率 | 售價 (USD) | 標籤 |")
+    L.append("| --- | --- | ---: | ---: | ---: | --- |")
+    for appid, e in pref_top:
+        L.append(f"| [{e['name']}](https://store.steampowered.com/app/{appid}/) | {e['released']} | {e['reviews']:,} "
+                 f"| {e['pos'] or '—'}% | {e['price'] or '—'} | {tag_cell(e['tags'])} |")
     L.append("")
 
     matured = {g["appid"]: g for g in games if g["cohort"] == "matured"}.values()
