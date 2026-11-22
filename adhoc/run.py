@@ -4,8 +4,7 @@ from pathlib import Path
 sys.path.insert(0, "scripts")
 import collect
 
-names = ["Auto Battler", "Management", "Physics", "Sandbox", "Real Time Tactics",
-         "Strategy", "Medieval", "Simulation", "Funny", "Character Customization", "RPG"]
+names = ["Auto Battler", "Management", "Physics", "Real Time Tactics", "Sandbox"]
 pop = requests.get("https://store.steampowered.com/tagdata/populartags/english", timeout=30).json()
 ids = {t["name"]: t["tagid"] for t in pop if t["name"] in names}
 print("resolved", ids, file=sys.stderr)

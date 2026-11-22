@@ -5,6 +5,9 @@ on:
     paths: [adhoc/run.py, .github/workflows/adhoc-autobattler.yml]
 permissions:
   contents: write
+concurrency:
+  group: adhoc
+  cancel-in-progress: true
 jobs:
   scan:
     runs-on: ubuntu-latest
