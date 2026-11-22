@@ -1,0 +1,55 @@
+tag,cohort,releases,median_reviews,p90_reviews,pct_ge100,pct_ge1000,pct_under10
+Roguelike,matured,1834,13,399,20.6,4.5,44.7
+Roguelike,recent,1434,0,67,7.9,1.7,69.9
+Roguelite,matured,1720,13,403,20.7,4.9,44.3
+Roguelite,recent,1596,0,60,7.1,1.4,71.6
+Action Roguelike,matured,1347,10,304,16.9,3.9,49.0
+Action Roguelike,recent,947,0,55,7.5,1.7,74.3
+Roguelike Deckbuilder,matured,220,42,477,36.8,5.0,20.0
+Roguelike Deckbuilder,recent,280,0,64,5.7,1.4,69.3
+Bullet Heaven,matured,108,76,834,43.5,9.3,18.5
+Bullet Heaven,recent,337,0,70,8.6,1.8,72.4
+Card Battler,matured,529,13,360,19.3,4.7,44.0
+Card Battler,recent,442,0,49,5.4,0.9,73.8
+Metroidvania,matured,283,19,435,22.6,4.9,33.6
+Metroidvania,recent,98,0,360,19.4,6.1,54.1
+Souls-like,matured,348,19,1298,27.3,11.2,38.5
+Souls-like,recent,111,10,431,21.6,7.2,49.5
+Precision Platformer,matured,693,0,58,6.1,1.3,58.3
+Precision Platformer,recent,278,0,37,5.4,0.4,77.0
+Cozy,matured,649,36,764,31.6,8.3,26.3
+Cozy,recent,1431,0,52,6.8,1.2,69.4
+Farming Sim,matured,346,20,612,26.6,7.8,37.3
+Farming Sim,recent,251,0,152,12.7,2.8,59.4
+Life Sim,matured,922,29,792,31.3,8.1,32.2
+Life Sim,recent,679,0,161,12.8,2.1,62.9
+Cooking,matured,316,17,525,26.6,5.4,38.9
+Cooking,recent,251,0,285,14.3,3.2,59.4
+City Builder,matured,431,25,882,29.7,8.8,33.2
+City Builder,recent,280,0,188,12.9,2.5,60.0
+Colony Sim,matured,199,24,1309,35.2,12.6,34.2
+Colony Sim,recent,195,0,112,10.3,2.1,63.1
+Automation,matured,424,23,662,27.8,6.1,37.7
+Automation,recent,676,0,115,11.1,2.4,65.1
+Open World Survival Craft,matured,81,158,8325,58.0,28.4,8.6
+Open World Survival Craft,recent,55,42,895,34.5,9.1,29.1
+Tower Defense,matured,537,0,213,14.9,4.1,56.6
+Tower Defense,recent,451,0,68,7.8,1.6,76.3
+Turn-Based Tactics,matured,1005,0,245,16.7,3.8,50.8
+Turn-Based Tactics,recent,783,0,55,6.4,0.9,74.2
+Incremental,matured,1054,12,261,16.7,3.6,47.4
+Incremental,recent,1293,0,98,10.0,1.6,63.6
+Horror,matured,2883,13,267,17.9,4.1,42.8
+Horror,recent,1449,0,102,10.2,2.2,62.9
+Psychological Horror,matured,2079,19,372,21.2,4.9,36.7
+Psychological Horror,recent,1050,0,104,10.4,1.8,60.3
+Puzzle,matured,3964,0,163,13.7,2.4,52.3
+Puzzle,recent,2229,0,45,6.0,1.0,73.1
+Detective,matured,574,13,448,21.4,4.5,43.4
+Detective,recent,339,0,96,9.7,2.1,63.4
+Visual Novel,matured,1436,23,406,23.7,4.5,33.8
+Visual Novel,recent,663,0,101,10.1,0.9,60.3
+Party Game,matured,164,14,356,17.1,4.3,39.0
+Party Game,recent,692,0,26,4.0,1.3,80.9
+ALL (unique),matured,13254,12,287,17.8,4.1,46.6
+ALL (unique),recent,9468,0,69,8.1,1.5,70.2
