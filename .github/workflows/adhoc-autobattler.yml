@@ -1,0 +1,23 @@
+name: Adhoc auto-battler scan
+on:
+  push:
+    branches: [claude/adhoc-autobattler]
+    paths: [adhoc/run.py, .github/workflows/adhoc-autobattler.yml]
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r requirements.txt
+      - run: python adhoc/run.py
+      - run: |
+          mkdir -p adhoc/out && mv data/$(date -u +%F)/* adhoc/out/ && cp config/tags.json adhoc/out/
+          git checkout -- config/tags.json data 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add adhoc && git commit -m "adhoc scan results" && git push origin HEAD:${GITHUB_REF_NAME}
