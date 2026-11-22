@@ -121,7 +121,7 @@ def main() -> None:
         L.append(f"| [{e['name']}](https://store.steampowered.com/app/{appid}/) | {e['released']} | {e['reviews']:,} "
                  f"| {e['pos'] or '—'}% | {e['price'] or '—'} | {tag_cell(e['tags'])} |")
     L.append("")
-    L.append("粗體 = 你的偏好類型。\n")
+    L.append("粗體 = 你的偏好類型。上市日是 Steam 顯示的日期：搶先體驗轉正式版（例如 Valheim）會以正式版日期出現，但評論是多年累積的，拆解競品時要留意。\n")
 
     pref_top = [kv for kv in sorted(recent.items(), key=lambda kv: -kv[1]["reviews"]) if kv[1]["tags"] & boost_tags][:10]
     L.append("### 偏好類型的近期新作\n")

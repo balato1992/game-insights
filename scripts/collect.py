@@ -78,7 +78,7 @@ def fetch_page(tag_id: int, start: int) -> tuple[int, list[dict]]:
         "cc": "us", "l": "english", "ndl": 1,
     }
     for attempt in range(8):
-        time.sleep(1.2)
+        time.sleep(2.0)
         try:
             r = session.get(SEARCH_URL, params=params, timeout=30)
         except requests.RequestException as e:
