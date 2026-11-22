@@ -1,0 +1,13 @@
+tag,cohort,releases,median_reviews,p90_reviews,pct_ge100,pct_ge1000,pct_under10
+Physics,matured,1722,0,223,14.5,3.4,53.0
+Physics,recent,1354,0,80,8.8,1.6,71.6
+Management,matured,1400,24,792,30.7,7.9,35.5
+Management,recent,1492,0,152,11.8,2.3,62.8
+Sandbox,matured,1147,22,1032,32.9,10.2,36.6
+Sandbox,recent,1067,0,211,14.2,3.3,57.0
+Real Time Tactics,matured,559,0,167,13.4,2.9,53.1
+Real Time Tactics,recent,369,0,43,5.7,0.8,77.0
+Auto Battler,matured,339,16,597,24.2,5.6,39.5
+Auto Battler,recent,441,0,130,11.6,1.8,61.7
+ALL (unique),matured,4261,12,535,21.6,5.9,45.3
+ALL (unique),recent,3802,0,103,10.2,1.9,66.8
