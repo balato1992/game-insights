@@ -117,8 +117,10 @@ def main() -> None:
     L.append("| --- | --- | ---: | ---: | ---: | --- |")
     def tag_cell(ts):
         return ", ".join(f"**{x}**" if x in boost_tags else x for x in sorted(ts))
+    def link(appid):
+        return f"https://store.steampowered.com/app/{appid.split(',')[0]}/"
     for appid, e in top:
-        L.append(f"| [{e['name']}](https://store.steampowered.com/app/{appid}/) | {e['released']} | {e['reviews']:,} "
+        L.append(f"| [{e['name']}]({link(appid)}) | {e['released']} | {e['reviews']:,} "
                  f"| {e['pos'] or '—'}% | {e['price'] or '—'} | {tag_cell(e['tags'])} |")
     L.append("")
     L.append("粗體 = 你的偏好類型。上市日是 Steam 顯示的日期：搶先體驗轉正式版（例如 Valheim）會以正式版日期出現，但評論是多年累積的，拆解競品時要留意。\n")
@@ -128,7 +130,7 @@ def main() -> None:
     L.append("| 遊戲 | 上市 | 評論數 | 好評率 | 售價 (USD) | 標籤 |")
     L.append("| --- | --- | ---: | ---: | ---: | --- |")
     for appid, e in pref_top:
-        L.append(f"| [{e['name']}](https://store.steampowered.com/app/{appid}/) | {e['released']} | {e['reviews']:,} "
+        L.append(f"| [{e['name']}]({link(appid)}) | {e['released']} | {e['reviews']:,} "
                  f"| {e['pos'] or '—'}% | {e['price'] or '—'} | {tag_cell(e['tags'])} |")
     L.append("")
 

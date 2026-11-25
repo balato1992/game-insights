@@ -25,6 +25,7 @@ import time
 from dataclasses import dataclass, asdict
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
@@ -169,7 +170,7 @@ def summarise(games: list[Game]) -> dict:
 
 
 def main() -> None:
-    today = date.today()
+    today = datetime.now(ZoneInfo("Asia/Taipei")).date()  # name snapshots by the Taipei date the run is for
     tags: dict[str, int] = json.loads(TAGS_FILE.read_text())
     matured = (today - timedelta(days=730), today - timedelta(days=365))
     recent = (today - timedelta(days=90), today + timedelta(days=1))
